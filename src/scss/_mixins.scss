@@ -1,0 +1,28 @@
+@mixin onBigScreen {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin onDestop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin onTab {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin onPhoneBig {
+  @media (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin onPhoneSmall {
+  @media (min-width: 320px) {
+    @content;
+  }
+}

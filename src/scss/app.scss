@@ -1,5 +1,6 @@
 @import 'libs/normalize';
 @import 'variables';
+@import 'mixins';
 
 
 .page {
@@ -11,13 +12,24 @@
 }
 
 .header {
+  margin-bottom: 50px;
+
   &__block {
     display: inherit;
     align-items: start;
+    position: relative;
   }
 
   &__block-button {
     display: inherit;
+
+    @include onPhoneSmall {
+      display: none;
+    }
+
+    @include onTab {
+      display: inherit;
+    }
   }
 
   &__button {
@@ -46,7 +58,15 @@
     }
   }
 
+  &__menu {
+    @include onTab {
+      display: none;
+    }
 
+    &-icon {
+      cursor: pointer;
+    }
+  }
 }
 
 .logo {
@@ -54,6 +74,7 @@
 }
 
 .container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 30px;
@@ -69,10 +90,22 @@
       margin-right: 0;
     }
   }
+
+  @include onPhoneSmall {
+    display: none;
+  }
+
+  @include onTab {
+    display: inherit;
+  }
   
   &__link {
+    display: inline-block;
+    font-size: 14px;
     color: $mediumGray;
     transition: $duration;
+
+    cursor: pointer;
 
     &--active {
       margin-right: 5px;
@@ -86,12 +119,28 @@
 
 .arrow {
   margin-bottom: 2px;
+
+  transition: $duration;
+
+  &--active {
+    transform: rotate(180deg);
+  }
 }
 
 .content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 50px;
+
+  @include onPhoneSmall {
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include onTab {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .main {
@@ -102,24 +151,42 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
+    @include onPhoneSmall {
+      grid-row: 2;
+      align-items: center;
+    }
+
+    @include onTab {
+      grid-row: 1;
+    }
   }
 
   &__articule {
     display: block;
     word-wrap: normal;
-    font-size: 65px;
+    font-size: 45px;
     font-weight: 700;
 
     margin-bottom: 40px;
+
+    @include onDestop {
+      font-size: 65px;
+    }
   }
 
   &__text {
     color: $mediumGray;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 20px;
     font-weight: 700;
 
     margin-bottom: 40px;
+
+    @include onDestop {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   &__button {
@@ -138,14 +205,28 @@
       background-color: $almostWhite;
       color: $almostBlack;
     }
+
+    @include onPhoneSmall {
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    @include onTab {
+      margin: 0;
+    }
   }
   &__block-text {
-    margin-top: 30%;
+    margin-top: 15%;
+
+    @include onDestop {
+      margin-top: 30%;
+    }
   }
 
   &__block-client {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
 
@@ -154,6 +235,82 @@
   }
 
   &__img {
-    width: 500px;
+    width: 400px;
+
+    @include onBigScreen {
+      width: 500px;
+    }
+  }
+}
+
+.add-block {
+  position: absolute;
+  background-color: #fff;
+  padding: 20px;
+  width: max-content;
+  height: max-content;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px $lightGray;
+}
+
+.features {
+  font-size: 14px;
+
+  &--block {
+    top: 30px;
+    left: 90px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__img {
+    width: 12px;
+    margin-right: 10px;
+  }
+
+  &__link {
+    display: block;
+    color: $mediumGray;
+  }
+}
+
+.company {
+  &--block {
+    top: 30px;
+    left: 250px;
+  }
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+
+  position: fixed;
+  margin-top: -30px;
+  margin-left: -80px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  &__content {
+    width: 200px;
+    height: 100vh;
+    background-color: #fff;
+  }
+
+  &__icon {
+    cursor: pointer;
   }
 }
